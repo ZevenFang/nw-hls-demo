@@ -25,10 +25,10 @@ function rtsp2m3u8(src, dest, videoId) {
     .addOption('-hls_list_size',0)
     // setup event handlers
     .on('progress', function() {
-      player.src({type:'application/x-mpegURL',src:dest});
+      /*player.src({type:'application/x-mpegURL',src:dest});
       player.ready(function () {
         player.play(); //自动播放
-      });
+      });*/
       // play.poster(image)
     })
     .on('end', function() {
