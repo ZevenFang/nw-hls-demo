@@ -1,0 +1,8 @@
+{
+    "version": "0.0.1",
+    "name": "helloworld",
+    "main": "index.html",
+    "dependencies": {
+        "fluent-ffmpeg": "^2.1.2"
+    }
+}
