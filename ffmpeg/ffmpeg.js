@@ -29,19 +29,18 @@ function rtsp2m3u8(src, dest, videoId, options) {
   fs.existsSync('stream/'+dest)||fs.mkdirSync('stream/'+dest);
   dest = 'stream/'+dest+'/output.m3u8';
   initPlayer(dest, videoId, options);
-  var proc = ffmpeg(src, { timeout: 432000 })
-    // set video bitrate
-    .videoBitrate(1024)
-    //set h264 preset
-    // .addOption('preset', 'superfast')
-    // set target codec
-    .videoCodec('libx264')
+  ffmpeg(src, { timeout: 432000 })
+    .videoCodec('copy')
     .noAudio()
+    .fps(10)
     // set hls segments time
     .addOption('-hls_time', 1)
     // include all the segments in the list
-    .addOption('-hls_list_size',0)
+    .addOption('-hls_list_size', 0)
     // setup event handlers
+    .on('start', function(commandLine) {
+      console.log('Spawned Ffmpeg with command: ' + commandLine);
+    })
     .on('end', function() {
       console.log('file has been converted succesfully');
     })
